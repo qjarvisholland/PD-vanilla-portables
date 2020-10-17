@@ -1,0 +1,29 @@
+#N canvas 0 23 557 356 10;
+#X obj 164 210 line;
+#X obj 164 160 pack;
+#X obj 164 47 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 164 67 t b b;
+#X floatatom 164 233 5 0 0 0 - - -;
+#X obj 164 273 sel, f 11;
+#X obj 164 90 random 4500;
+#X obj 191 113 random 4500;
+#X msg 164 179 \$2 \$1;
+#X text 236 88 generate time (ms) of ramp;
+#X text 265 114 generate new target value;
+#X text 165 308 bang when ramp finishes. connect to bang at top for
+endless loop, f 32;
+#X text 182 45 start;
+#X obj 144 307 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X connect 0 0 4 0;
+#X connect 1 0 8 0;
+#X connect 2 0 3 0;
+#X connect 3 0 6 0;
+#X connect 3 1 7 0;
+#X connect 4 0 5 0;
+#X connect 5 0 13 0;
+#X connect 6 0 1 0;
+#X connect 7 0 1 1;
+#X connect 7 0 5 1;
+#X connect 8 0 0 0;

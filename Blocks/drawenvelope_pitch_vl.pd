@@ -1,0 +1,57 @@
+#N canvas -7 0 958 988 12;
+#N canvas 0 50 450 250 (subpatch) 0;
+#X array pitch_envelope 100 float 3;
+#A 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0;
+#X coords 0 1 100 -1 200 140 1;
+#X restore 85 26 graph;
+#X msg 106 201 99 4000;
+#X obj 106 257 line;
+#X obj 106 295 tabread pitch_envelope;
+#X obj 106 365 * 127;
+#X obj 106 415 mtof;
+#X obj 106 470 osc~;
+#X obj 105 548 dac~;
+#X obj 196 185 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X msg 179 212 0;
+#X obj 106 170 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X text 212 214 reset;
+#X msg 377 314 99 4000;
+#X obj 377 370 line;
+#X obj 377 621 dac~;
+#X obj 467 298 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X msg 450 325 0;
+#X obj 377 283 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X text 483 327 reset;
+#X obj 377 583 *~;
+#N canvas 0 50 450 250 (subpatch) 0;
+#X array audio_envelope 100 float 3;
+#A 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0;
+#X coords 0 1 100 -1 200 140 1;
+#X restore 374 133 graph;
+#X obj 377 407 tabread4~ audio_envelope;
+#X connect 1 0 2 0;
+#X connect 2 0 3 0;
+#X connect 3 0 4 0;
+#X connect 4 0 5 0;
+#X connect 5 0 6 0;
+#X connect 6 0 19 0;
+#X connect 8 0 9 0;
+#X connect 9 0 2 0;
+#X connect 10 0 1 0;
+#X connect 12 0 13 0;
+#X connect 13 0 21 0;
+#X connect 15 0 16 0;
+#X connect 16 0 13 0;
+#X connect 17 0 12 0;
+#X connect 19 0 14 0;
+#X connect 21 0 19 1;

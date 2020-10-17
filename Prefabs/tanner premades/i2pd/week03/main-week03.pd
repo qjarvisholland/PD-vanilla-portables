@@ -1,0 +1,396 @@
+#N canvas 0 23 751 755 10;
+#X obj 3 5;
+#X obj 230 21 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 230 718 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X text 46 75 file mgmt: best practice;
+#X text 38 186 1 have a main "pd" folder;
+#X text 38 239 2 make a new folder for every project. give this folder
+a descriptive name ("sampler" \, "sequencer" \, ...), f 29;
+#X text 38 329 3 inside that folder \, name your patch something simple
+and consistent ("main.pd" \, "000.pd" \, "main-sequencer.pd"), f 29
+;
+#X text 38 429 4 now \, put all dependencies in this folder (samples
+\, abstractions \, etc...), f 29;
+#X text 38 549 **do not use spaces! use - or _ or camelCase instead**
+, f 28;
+#X obj 520 137 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 520 157 openpanel;
+#X obj 1130 21 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 1130 718 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X text 1191 76 expressions;
+#X obj 1219 245 expr 100/5;
+#X floatatom 1219 266 5 0 0 0 - - -;
+#X obj 1219 223 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X floatatom 1218 160 5 0 0 0 - - -;
+#X msg 1218 117 100;
+#X obj 1218 139 / 5;
+#X text 1157 186 use [expr] for complex math.;
+#X text 1157 421 recommended only for the mathematically inclined \,
+or for copy & pasting from the mathematically inclined, f 28;
+#X text 1157 491 you need not understand math to accept its truth,
+f 27;
+#X floatatom 1219 349 5 0 0 0 - - -;
+#X msg 1219 307 100;
+#X obj 1219 328 expr $f1/5;
+#X text 38 589 **you must first save a patch somewhere before its path
+will exist**, f 28;
+#X text 676 481 -resize changes size of actual array. if we didnt do
+this \, our sample would either be cut short or left with silence at
+the end, f 11;
+#X obj 440 21 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 440 718 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X text 308 113 so far:;
+#X text 307 299 aka:;
+#X text 304 485 so...:;
+#X floatatom 294 517 5 0 0 0 - - -;
+#X obj 294 537 osc~;
+#X floatatom 344 517 5 0 0 0 - - -;
+#X obj 344 537 osc~;
+#X text 562 77 soundfiler;
+#X msg 520 178 read -resize \$1 left right;
+#X obj 520 199 soundfiler;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array left 7.53244e+06 float 2;
+#X coords 0 1 7.53244e+06 -1 200 140 1;
+#X restore 466 432 graph;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array right 7.53244e+06 float 2;
+#X coords 0 1 7.53244e+06 -1 200 140 1 0 0;
+#X restore 466 589 graph;
+#X obj 597 216 print;
+#X floatatom 520 220 9 0 0 0 - - -;
+#X obj 475 316 soundfiler;
+#X msg 475 295 read -resize samples/example.wav left right;
+#X floatatom 475 337 9 0 0 0 - - -;
+#X text 566 317 ^local path;
+#X obj 3054 718;
+#X obj 1402 124 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 1402 144 openpanel;
+#X obj 1402 186 soundfiler;
+#X obj 1402 277 expr 44100 / $f1;
+#X obj 1412 227 s samp-sz;
+#X obj 1402 298 phasor~;
+#X obj 1402 370 *~;
+#X obj 1417 348 r samp-sz;
+#X msg 1440 540 \$1 100;
+#X obj 1440 561 line~;
+#X obj 1443 498 hsl 128 15 0 127 0 0 empty empty empty -2 -8 0 10 -262144
+-1 -1 0 1;
+#X obj 1440 518 / 127;
+#X obj 1402 631 *~;
+#X obj 1440 661 dac~;
+#X obj 1502 631 *~;
+#X obj 760 21 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 760 718 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X text 878 263 introduce s / r;
+#X text 1447 370 # of samples * phasor (0-1) means sample plays at
+normal speed, f 34;
+#X obj 812 190 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 812 213 delay 5;
+#X msg 812 304 1 \, 4.41e+08 1e+07;
+#X msg 822 244 1;
+#X obj 812 325 vline~;
+#X obj 812 457 *~;
+#X obj 827 431 vline~;
+#X msg 872 213 0 5;
+#X obj 872 243 s cutoff;
+#X obj 822 265 s cutoff;
+#X obj 827 410 r cutoff;
+#X msg 840 566 \$1 100;
+#X obj 840 587 line~;
+#X obj 843 524 hsl 128 15 0 127 0 0 empty empty empty -2 -8 0 10 -262144
+-1 -1 0 1;
+#X obj 840 544 / 127;
+#X obj 812 617 *~;
+#X obj 812 648 dac~, f 11;
+#X obj 928 125 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 928 145 openpanel;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array left1 117600 float 2;
+#X coords 0 1 117600 -1 100 70 1 0 0;
+#X restore 1007 470 graph;
+#X obj 812 386 tabread4~ left1;
+#X obj 922 457 *~;
+#X obj 937 431 vline~;
+#X obj 937 410 r cutoff;
+#X obj 922 386 tabread4~ right1;
+#X obj 875 617 *~;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array right1 117600 float 2;
+#X coords 0 1 117600 -1 100 70 1 0 0;
+#X restore 1007 560 graph;
+#X obj 928 187 soundfiler;
+#X msg 928 166 read -resize \$1 left1 right1;
+#X text 1481 71 looping sampler;
+#X obj 1340 21 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 1340 718 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 315 187 osc~;
+#X obj 277 380 osc~;
+#X obj 343 383 osc~;
+#X floatatom 315 148 5 0 0 0 - - -;
+#X floatatom 277 340 5 0 0 0 - - -;
+#X text 289 78 thinking in stereo;
+#X text 503 120 browser:;
+#X text 503 270 quick select:;
+#X obj 1670 21 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 1670 718 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X text 334 596 (i've left these [dac~] objects "broken" on purpose
+\, to avoid glitchy audio. just add the ~ to "fix" the patch), f 12
+;
+#X text 925 298 just arbitrary / impossiblly long figures. take 3 hrs
+to get to the end of a ridiculously long sample., f 30;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array left2 117600 float 2;
+#X coords 0 1 117600 -1 100 70 1 0 0;
+#X restore 1549 536 graph;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array right2 117600 float 2;
+#X coords 0 1 117600 -1 100 70 1 0 0;
+#X restore 1549 626 graph;
+#X msg 1402 165 read -resize \$1 left2 right2;
+#X obj 1402 431 tabread4~ left2;
+#X obj 1502 431 tabread4~ right2;
+#X text 1930 66 add variable play-back speed;
+#X obj 1732 84 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 1732 104 openpanel;
+#X obj 1732 146 soundfiler;
+#X obj 1732 217 expr 44100 / $f1;
+#X obj 1742 187 s samp-sz;
+#X obj 1732 298 phasor~;
+#X obj 1732 350 *~;
+#X obj 1747 328 r samp-sz;
+#X msg 1770 600 \$1 100;
+#X obj 1770 621 line~;
+#X obj 1773 558 hsl 128 15 0 127 0 0 empty empty empty -2 -8 0 10 -262144
+-1 -1 0 1;
+#X obj 1770 578 / 127;
+#X obj 1732 691 *~;
+#X obj 1770 721 dac~;
+#X obj 1832 691 *~;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array left3 219884 float 2;
+#X coords 0 1 219884 -1 100 70 1 0 0;
+#X restore 1992 622 graph;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array right3 219884 float 2;
+#X coords 0 1 219884 -1 100 70 1 0 0;
+#X restore 2102 622 graph;
+#X obj 1732 411 tabread4~ left3;
+#X obj 1832 411 tabread4~ right3;
+#X msg 1732 125 read -resize \$1 left3 right3;
+#X obj 1992 508 snapshot~;
+#X obj 1992 444 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1
+0 1;
+#X obj 1992 464 metro 50;
+#X obj 1992 549 /;
+#X obj 2007 530 r samp-sz;
+#X obj 1995 594 hsl 95 15 0 1 0 0 empty empty empty -2 -8 0 10 -261234
+-1 -1 0 1;
+#X obj 1992 185 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 1992 235 f;
+#X obj 1995 256 hsl 128 15 -2 2 0 0 empty empty empty -2 -8 0 10 -261234
+-1 -1 0 1;
+#X floatatom 1992 296 5 0 0 0 - - -;
+#X obj 1742 239 s orig-speed;
+#X obj 2007 210 r orig-speed;
+#X text 1993 271 output range: -2 to 2;
+#X text 2202 593 output range: 0 to 1;
+#X obj 1992 316 s var-speed;
+#X obj 1742 272 r var-speed;
+#X text 2012 185 bang to reset to original speed;
+#X text 2129 254 move this slider to change playback speed (range =
+double-time reverse to doublt-time forward;
+#X text 2014 436 turn on to monitor where you are in sample playback
+(visualized by slider below), f 42;
+#X obj 2105 594 hsl 95 15 0 1 0 0 empty empty empty -2 -8 0 10 -261234
+-1 -1 0 1;
+#X obj 1818 380 s~ monitor;
+#X obj 2002 484 r~ monitor;
+#X obj 2450 21 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 2450 718 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 2556 270 writesf~ 2;
+#X msg 2556 146 open recording.wav;
+#X text 2624 264 connect audio to inlets for left/right channels \,
+just like with [dac~];
+#X text 2673 135 change "recording.wav" to whatever you want. make
+sure to include ".wav" at the end. CLICK THIS FIRST! or else your file
+won't exist;
+#X text 2487 273 step one;
+#X text 2487 143 step two;
+#X msg 2572 209 start;
+#X msg 2582 229 stop;
+#X text 2618 212 start / stop recording -- make sure you do this AFTER
+step two, f 34;
+#X text 2487 213 step three;
+#X text 2620 66 create recordings on the fly;
+#X msg 2695 506 \$1 100;
+#X obj 2695 527 line~;
+#X obj 2698 464 hsl 128 15 0 127 0 0 empty empty empty -2 -8 0 10 -262144
+-1 -1 0 1;
+#X obj 2695 484 / 127;
+#X obj 2680 588 *~;
+#X obj 2680 631 dac~, f 6;
+#X obj 2713 588 *~;
+#X text 2554 343 **insert this into your patch at the same stage as
+your [dac~] aka downstream of your main gainstage-- it is unfortunately
+quite common to get a recording that is super blown out and sounds
+like crap \, so be mindful of gain staging. roughly 25% volume is typically
+a good place to start**;
+#X text 2623 414 for example:;
+#X obj 2794 680 writesf~ 2;
+#X msg 2794 556 open recording.wav;
+#X msg 2810 619 start;
+#X msg 2820 639 stop;
+#X text 2562 556 connect sound sources to hot inlets here --------------->
+, f 16;
+#X text 892 77 one-shot sampler;
+#X obj 277 430 dac;
+#X obj 294 608 dac;
+#X obj 315 238 dac;
+#X connect 1 0 2 0;
+#X connect 9 0 10 0;
+#X connect 10 0 38 0;
+#X connect 11 0 12 0;
+#X connect 14 0 15 0;
+#X connect 16 0 14 0;
+#X connect 18 0 19 0;
+#X connect 19 0 17 0;
+#X connect 24 0 25 0;
+#X connect 25 0 23 0;
+#X connect 28 0 29 0;
+#X connect 33 0 34 0;
+#X connect 34 0 189 0;
+#X connect 35 0 36 0;
+#X connect 36 0 189 1;
+#X connect 38 0 39 0;
+#X connect 39 0 43 0;
+#X connect 39 1 42 0;
+#X connect 44 0 46 0;
+#X connect 45 0 44 0;
+#X connect 49 0 50 0;
+#X connect 50 0 114 0;
+#X connect 51 0 52 0;
+#X connect 51 0 53 0;
+#X connect 52 0 54 0;
+#X connect 54 0 55 0;
+#X connect 55 0 115 0;
+#X connect 55 0 116 0;
+#X connect 56 0 55 1;
+#X connect 57 0 58 0;
+#X connect 58 0 61 1;
+#X connect 58 0 63 1;
+#X connect 59 0 60 0;
+#X connect 60 0 57 0;
+#X connect 61 0 62 0;
+#X connect 63 0 62 1;
+#X connect 64 0 65 0;
+#X connect 68 0 69 0;
+#X connect 68 0 75 0;
+#X connect 69 0 70 0;
+#X connect 69 0 71 0;
+#X connect 70 0 72 0;
+#X connect 71 0 77 0;
+#X connect 72 0 88 0;
+#X connect 72 0 92 0;
+#X connect 73 0 83 0;
+#X connect 74 0 73 1;
+#X connect 75 0 76 0;
+#X connect 78 0 74 0;
+#X connect 79 0 80 0;
+#X connect 80 0 83 1;
+#X connect 80 0 93 1;
+#X connect 81 0 82 0;
+#X connect 82 0 79 0;
+#X connect 83 0 84 0;
+#X connect 85 0 86 0;
+#X connect 86 0 96 0;
+#X connect 88 0 73 0;
+#X connect 89 0 93 0;
+#X connect 90 0 89 1;
+#X connect 91 0 90 0;
+#X connect 92 0 89 0;
+#X connect 93 0 84 1;
+#X connect 96 0 95 0;
+#X connect 98 0 99 0;
+#X connect 100 0 190 0;
+#X connect 100 0 190 1;
+#X connect 101 0 188 0;
+#X connect 102 0 188 1;
+#X connect 103 0 100 0;
+#X connect 104 0 101 0;
+#X connect 104 0 102 0;
+#X connect 108 0 109 0;
+#X connect 114 0 51 0;
+#X connect 115 0 61 0;
+#X connect 116 0 63 0;
+#X connect 118 0 119 0;
+#X connect 119 0 137 0;
+#X connect 120 0 121 0;
+#X connect 120 0 122 0;
+#X connect 121 0 123 0;
+#X connect 121 0 148 0;
+#X connect 123 0 124 0;
+#X connect 124 0 135 0;
+#X connect 124 0 136 0;
+#X connect 124 0 158 0;
+#X connect 125 0 124 1;
+#X connect 126 0 127 0;
+#X connect 127 0 130 1;
+#X connect 127 0 132 1;
+#X connect 128 0 129 0;
+#X connect 129 0 126 0;
+#X connect 130 0 131 0;
+#X connect 132 0 131 1;
+#X connect 135 0 130 0;
+#X connect 136 0 132 0;
+#X connect 137 0 120 0;
+#X connect 138 0 141 0;
+#X connect 139 0 140 0;
+#X connect 140 0 138 0;
+#X connect 141 0 157 0;
+#X connect 141 0 143 0;
+#X connect 142 0 141 1;
+#X connect 144 0 145 0;
+#X connect 145 0 146 0;
+#X connect 146 0 147 0;
+#X connect 147 0 152 0;
+#X connect 149 0 145 1;
+#X connect 153 0 123 0;
+#X connect 159 0 138 0;
+#X connect 160 0 161 0;
+#X connect 163 0 162 0;
+#X connect 168 0 162 0;
+#X connect 169 0 162 0;
+#X connect 173 0 174 0;
+#X connect 174 0 177 1;
+#X connect 174 0 179 1;
+#X connect 175 0 176 0;
+#X connect 176 0 173 0;
+#X connect 177 0 178 0;
+#X connect 177 0 182 0;
+#X connect 179 0 178 1;
+#X connect 179 0 182 1;
+#X connect 183 0 182 0;
+#X connect 184 0 182 0;
+#X connect 185 0 182 0;

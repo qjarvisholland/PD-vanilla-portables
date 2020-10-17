@@ -4,7 +4,7 @@
 #X obj 283 137 tabread4~;
 #X obj 196 132 phasor~;
 #X obj 379 138 tabosc4~;
-#N canvas -8 -8 1920 997 envelope01 1;
+#N canvas -8 -8 1920 997 envelope01 0;
 #X obj 397 -738 vsl 18 66 0 1 0 0 \$0-FromAFader \$0-ToAFader Attack
 -7 -11 0 10 -262144 -1 -1 650 1;
 #X obj 444 -738 vsl 18 66 0 1 0 0 \$0-FromDFader \$0-ToDFader Decay
@@ -1540,3 +1540,47 @@ patch \, as well as some faders exponential behaviour;
 #X connect 418 0 213 0;
 #X connect 419 0 235 0;
 #X restore 568 246 pd envelope01;
+#X floatatom 344 356 5 0 0 0 - - -;
+#X obj 343 380 osc~;
+#X obj 344 417 *~;
+#X obj 344 478 dac~;
+#X obj 385 392 vline~;
+#X msg 448 312 1 250 \, 0 750 250;
+#X text 463 337 ramp to 1 in 250ms \,, f 24;
+#X text 448 354 ramp to 0 in 750ms (initiate after 250ms), f 24;
+#X floatatom 385 623 5 0 0 0 - - -;
+#X floatatom 458 622 5 0 0 0 - - -;
+#X floatatom 346 714 5 0 0 0 - - -;
+#X obj 346 734 osc~;
+#X obj 346 780 *~;
+#X obj 334 893 dac~;
+#X obj 367 650 f;
+#X obj 391 756 vline~;
+#X msg 391 729 1 \$1 \, 0 \$2 \$1;
+#X obj 353 604 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 391 699 pack \$1 \$2;
+#X text 367 569 6b;
+#X text 345 545 make the envelope's parameters variable;
+#X text 383 524 introduce [pack];
+#X obj 383 296 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X text 383 605 ATTACK RELEASE;
+#X connect 6 0 7 0;
+#X connect 7 0 8 0;
+#X connect 8 0 9 0;
+#X connect 8 0 9 1;
+#X connect 10 0 8 1;
+#X connect 11 0 10 0;
+#X connect 14 0 20 1;
+#X connect 15 0 24 1;
+#X connect 16 0 17 0;
+#X connect 17 0 18 0;
+#X connect 18 0 19 0;
+#X connect 18 0 19 1;
+#X connect 20 0 24 0;
+#X connect 21 0 18 1;
+#X connect 22 0 21 0;
+#X connect 23 0 20 0;
+#X connect 24 0 22 0;
+#X connect 28 0 11 0;
