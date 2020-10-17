@@ -1,0 +1,6 @@
+#N canvas -7 0 958 988 12;
+#X obj 66 131 phasor~;
+#X obj 128 132 phasor~;
+#X obj 283 137 tabread4~;
+#X obj 196 132 phasor~;
+#X obj 379 138 tabosc4~;
