@@ -1,0 +1,88 @@
+#N struct 1043-dial float p1x float p1y float p2x float p2y float c1
+float px float py float c2 float c3 float c4 float w1 float w2;
+#N struct 1044-dial float p1x float p1y float p2x float p2y float c1
+float px float py float c2 float c3 float c4 float w1 float w2;
+#N struct 1045-dial float p1x float p1y float p2x float p2y float c1
+float px float py float c2 float c3 float c4 float w1 float w2;
+#N struct 1046-dial float p1x float p1y float p2x float p2y float c1
+float px float py float c2 float c3 float c4 float w1 float w2;
+#N canvas 169 238 771 288 10;
+#X obj 411 187 gknob 250;
+#A saved 73 75 801 801 1000 1000 5;
+#N canvas 0 23 195 247 RGB 0;
+#X obj 17 34 / 255;
+#X obj 17 56 * 8;
+#X obj 17 100 i;
+#X obj 17 78 + 0.5;
+#X obj 67 34 / 255;
+#X obj 67 56 * 8;
+#X obj 67 100 i;
+#X obj 67 78 + 0.5;
+#X obj 117 34 / 255;
+#X obj 117 56 * 8;
+#X obj 117 100 i;
+#X obj 117 78 + 0.5;
+#X obj 17 122 * 100;
+#X obj 17 181 +;
+#X obj 67 122 * 10;
+#X obj 67 165 t b f;
+#X obj 67 143 +;
+#X obj 117 127 t b f;
+#X obj 17 202 outlet;
+#X obj 17 13 inlet;
+#X obj 67 13 inlet;
+#X obj 117 13 inlet;
+#X connect 0 0 1 0;
+#X connect 1 0 3 0;
+#X connect 2 0 12 0;
+#X connect 3 0 2 0;
+#X connect 4 0 5 0;
+#X connect 5 0 7 0;
+#X connect 6 0 14 0;
+#X connect 7 0 6 0;
+#X connect 8 0 9 0;
+#X connect 9 0 11 0;
+#X connect 10 0 17 0;
+#X connect 11 0 10 0;
+#X connect 12 0 13 0;
+#X connect 13 0 18 0;
+#X connect 14 0 16 0;
+#X connect 15 0 13 0;
+#X connect 15 1 13 1;
+#X connect 16 0 15 0;
+#X connect 17 0 16 0;
+#X connect 17 1 16 1;
+#X connect 19 0 0 0;
+#X connect 20 0 4 0;
+#X connect 21 0 8 0;
+#X restore 242 129 pd RGB;
+#X obj 242 19 vsl 16 101 0 255 0 0 empty empty RED 0 -9 0 10 -258113
+-1 -1 0 1;
+#X obj 282 19 vsl 16 101 0 255 0 0 empty empty GREEN 0 -9 0 10 -4034
+-1 -1 0 1;
+#X obj 322 19 vsl 16 101 0 255 0 0 empty empty BLUE 0 -9 0 10 -4160
+-262144 -1 0 1;
+#X floatatom 411 125 5 0 0 0 - - -;
+#X msg 411 145 width \$1;
+#X msg 471 145 size 75;
+#X obj 14 175 gknob 100;
+#A saved 21 100 0 0 0 0 0;
+#X obj 114 200 gknob 75;
+#A saved 84 75 0 0 0 0 0;
+#X obj 190 224 gknob 50;
+#A saved 15 50 0 0 0 0 0;
+#X msg 242 171 color \$1 \$1 999 999;
+#X floatatom 242 150 0 0 0 0 - - -;
+#X text 387 27 GridKnob mod from https://forum.pdpatchrepo.info/topic/10838/no-mouse-external-some-success
+;
+#X floatatom 411 267 5 0 0 0 - - -;
+#X connect 0 0 14 0;
+#X connect 1 0 12 0;
+#X connect 2 0 1 0;
+#X connect 3 0 1 1;
+#X connect 4 0 1 2;
+#X connect 5 0 6 0;
+#X connect 6 0 0 0;
+#X connect 7 0 0 0;
+#X connect 11 0 0 0;
+#X connect 12 0 11 0;

@@ -10,7 +10,7 @@ Details: <http://www.apache.org/licenses/LICENSE-2.0>, f 65;
 #X text 7 61 Top-level synthesizer definition;
 #X obj 8 304 outlet~;
 #X obj 96 304 outlet~;
-#X obj 8 264 post-process~;
+#X obj 43 262 post-process~;
 #X text 154 260 Post-processing stage. (The distinction between this
 and the `voice~` would be more meaningful in a polyphonic synth.);
 #X text 154 227 Monophonic synth voice.;
@@ -19,8 +19,8 @@ and the `voice~` would be more meaningful in a polyphonic synth.);
 the interface used between `simple-mono` (the note parser) and `voice~`
 (the controllable oscillator)., f 65;
 #X connect 0 0 9 0;
+#X connect 0 0 7 0;
 #X connect 0 1 9 1;
+#X connect 0 1 8 0;
 #X connect 2 0 0 0;
 #X connect 3 0 2 0;
-#X connect 9 0 7 0;
-#X connect 9 1 8 0;

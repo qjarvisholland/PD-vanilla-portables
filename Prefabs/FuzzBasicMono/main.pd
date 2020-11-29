@@ -4,13 +4,20 @@
 #X text 139 3 Copyright 2019 Dan Bornstein <danfuzz@milk.com>. Licensed
 AS IS and WITHOUT WARRANTY under the Apache License \, Version 2.0.
 Details: <http://www.apache.org/licenses/LICENSE-2.0>, f 65;
-#X obj 11 145 notein 1;
+#X obj 15 134 notein 1;
 #X obj 11 201 pack 0 0;
 #X obj 11 312 dac~, f 6;
 #X text 13 73 "Vanilla Pd" main driver for this patch.;
 #X obj 11 253 synth~;
-#X connect 2 0 3 0;
+#X obj 12 176 + 20;
+#X floatatom 115 232 5 0 0 0 - - -;
+#X obj 124 171 nbx 5 14 -1e+037 1e+037 0 0 empty empty empty 0 -8 0
+10 -262144 -1 -1 0 256;
+#X connect 2 0 8 0;
+#X connect 2 0 7 0;
 #X connect 2 1 3 1;
+#X connect 2 1 9 0;
 #X connect 3 0 6 0;
 #X connect 6 0 4 0;
 #X connect 6 1 4 1;
+#X connect 7 0 3 0;
